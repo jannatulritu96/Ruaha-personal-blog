@@ -10,9 +10,9 @@
             <div class="col-lg-9 col-md-8 col-xs-12 align-self-center">
                 <nav aria-label="breadcrumb" class="mt-2 float-md-right float-left">
                     <ol class="breadcrumb mb-0 justify-content-end p-0">
-                        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-                        <li class="breadcrumb-item active"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Author list</li>
+                        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                        <li class="breadcrumb-item active"><a href="{{ route('category.index') }}">Category list</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Category create</li>
                     </ol>
                 </nav>
             </div>
@@ -24,12 +24,12 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Author create form</h4>
-                        <form method="post" class="form-horizontal" action="{{ route('user.store') }}" enctype="multipart/form-data">
+                        <form method="post" class="form-horizontal" action="{{ route('category.store') }}" enctype="multipart/form-data">
                             @csrf
                             @include('.admin.layouts._messages')
                             <div class="box-body" style="width: 60%;margin: 0 auto;">
                                 <div class="form-group" style="margin-left: 5px;">
-                                    <label for="name">Name<span
+                                    <label for="name">Category<span
                                             style="color: red">*</span></label>
                                     <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="Name" value="{{ old('name') }}"  style="width: 98%;">
                                     @error('name')
@@ -41,7 +41,7 @@
                                 <div class="box-footer pull-right">
                                     <button type="submit" class="btn btn-primary">Create</button>
                                     <button type="reset" class="btn btn-warning btn-flat">Clear</button>
-                                    <a href="{{ route('user.index') }}" class="btn btn-danger btn-flat"><span class="glyphicon glyphicon-arrow-left"></span> Back</a>
+                                    <a href="{{ route('category.index') }}" class="btn btn-danger btn-flat"><span class="glyphicon glyphicon-arrow-left"></span> Back</a>
                                 </div>
                             </div>
                         </form>

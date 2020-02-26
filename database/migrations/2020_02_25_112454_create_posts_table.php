@@ -15,11 +15,11 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('category_id')->nullable;
-            $table->integer('user_id')->nullable;
+            $table->integer('category_id');
+            $table->integer('user_id');
             $table->string('title');
             $table->longText('description');
-            $table->text('image');
+            $table->string('image');
             $table->enum('is_featured',['Yes','No'])->default('No');
             $table->integer('total_hit')->nullable();
             $table->date('published_date');

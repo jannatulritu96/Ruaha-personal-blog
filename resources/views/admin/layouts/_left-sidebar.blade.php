@@ -29,7 +29,7 @@
                 </a>
             </li>
             <li class="sidebar-item">
-                <a class="sidebar-link  waves-effect waves-dark" href="{{ route('dashboard') }}">
+                <a class="sidebar-link  waves-effect waves-dark" href="{{ route('post.index') }}">
                     <i class="fa fa-table"></i>
                     <span>Posts</span>
                 </a>

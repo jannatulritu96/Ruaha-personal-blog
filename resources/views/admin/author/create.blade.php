@@ -10,9 +10,9 @@
             <div class="col-lg-9 col-md-8 col-xs-12 align-self-center">
                 <nav aria-label="breadcrumb" class="mt-2 float-md-right float-left">
                     <ol class="breadcrumb mb-0 justify-content-end p-0">
-                        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-                        <li class="breadcrumb-item active"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Author list</li>
+                        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                        <li class="breadcrumb-item active"><a href="{{ route('user.index') }}">Author list</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Author create</li>
                     </ol>
                 </nav>
             </div>

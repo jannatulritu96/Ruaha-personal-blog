@@ -12,7 +12,7 @@
                     <ol class="breadcrumb mb-0 justify-content-end p-0">
                         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
                         <li class="breadcrumb-item active"><a href="{{ route('category.index') }}">Category list</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Category create</li>
+                        <li class="breadcrumb-item active" aria-current="page">Category edit</li>
                     </ol>
                 </nav>
             </div>

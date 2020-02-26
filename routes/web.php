@@ -12,9 +12,9 @@
 */
 Auth::routes();
 
-Route::get('/', function () {
+Route::get('login', function () {
     return redirect()->route('dashboard');
-})->name('home');
+});
 
 // Change Password
 Route::get('password-change', 'DashboardController@showResetForm')->name('password.change');
@@ -24,6 +24,7 @@ Auth::routes([
     'register' => false,
 ]);
 
+Route::get('/','FrontendController@index')->name('home');
 
 Route::middleware('auth')->group(function (){
     // Dashboard
@@ -33,9 +34,18 @@ Route::middleware('auth')->group(function (){
     Route::post('/category/change-activity/{id}', 'CategoryController@changeActivity')->name('category.change-activity');
     // Post route
     Route::resource('post','PostController');
+    Route::post('/post/change-activity/{id}', 'PostController@changeActivity')->name('post.change-activity');
     //Author route
     Route::resource('user','UserController');
     Route::post('/user/change-activity/{id}', 'UserController@changeActivity')->name('user.change-activity');
 
 });
 
+//contact us
+Route::get('contact','FrontendController@contact')->name('contact');
+
+//about me
+Route::get('about','FrontendController@about')->name('about');
+
+//about me
+Route::get('slider','FrontendController@slider')->name('slider');
