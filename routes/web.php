@@ -26,14 +26,16 @@ Auth::routes([
 
 
 Route::middleware('auth')->group(function (){
-
+    // Dashboard
     Route::get('dashboard','DashboardController@index')->name('dashboard');
-
+    // Category route
     Route::resource('category','CategoryController');
     Route::post('/category/change-activity/{id}', 'CategoryController@changeActivity')->name('category.change-activity');
-
+    // Post route
     Route::resource('post','PostController');
-//    Route::resource('author','AuthorController');
+    //Author route
+    Route::resource('user','UserController');
+    Route::post('/user/change-activity/{id}', 'UserController@changeActivity')->name('user.change-activity');
 
 });
 

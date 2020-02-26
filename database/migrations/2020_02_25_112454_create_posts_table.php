@@ -23,7 +23,7 @@ class CreatePostsTable extends Migration
             $table->enum('is_featured',['Yes','No'])->default('No');
             $table->integer('total_hit')->nullable();
             $table->date('published_date');
-            $table->tinyInteger('status')->default(1);
+            $table->enum('status',['Published','Unpublished']);
             $table->timestamps();
         });
     }

@@ -16,7 +16,12 @@
                     <span>Dashboard</span>
                 </a>
             </li>
-
+            <li class="sidebar-item">
+                <a class="sidebar-link  waves-effect waves-dark" href="{{ route('user.index') }}">
+                    <i class="fa fa-table"></i>
+                    <span>Author</span>
+                </a>
+            </li>
             <li class="sidebar-item">
                 <a class="sidebar-link  waves-effect waves-dark" href="{{ route('category.index') }}">
                     <i class="fa fa-table"></i>

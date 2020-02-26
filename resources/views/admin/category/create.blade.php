@@ -12,7 +12,7 @@
                     <ol class="breadcrumb mb-0 justify-content-end p-0">
                         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
                         <li class="breadcrumb-item active"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Category list</li>
+                        <li class="breadcrumb-item active" aria-current="page">Author list</li>
                     </ol>
                 </nav>
             </div>
@@ -23,8 +23,8 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Category create form</h4>
-                        <form method="post" class="form-horizontal" action="{{ route('category.store') }}" enctype="multipart/form-data">
+                        <h4 class="card-title">Author create form</h4>
+                        <form method="post" class="form-horizontal" action="{{ route('user.store') }}" enctype="multipart/form-data">
                             @csrf
                             @include('.admin.layouts._messages')
                             <div class="box-body" style="width: 60%;margin: 0 auto;">
@@ -41,7 +41,7 @@
                                 <div class="box-footer pull-right">
                                     <button type="submit" class="btn btn-primary">Create</button>
                                     <button type="reset" class="btn btn-warning btn-flat">Clear</button>
-                                    <a href="{{ route('category.index') }}" class="btn btn-danger btn-flat"><span class="glyphicon glyphicon-arrow-left"></span> Back</a>
+                                    <a href="{{ route('user.index') }}" class="btn btn-danger btn-flat"><span class="glyphicon glyphicon-arrow-left"></span> Back</a>
                                 </div>
                             </div>
                         </form>
