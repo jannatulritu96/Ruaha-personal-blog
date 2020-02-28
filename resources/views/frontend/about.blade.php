@@ -1,5 +1,13 @@
 @extends('frontend.layout.masters')
 @section('content')
+    <!-- xxx Breadcrumb Start xxx -->
+    <section>
+        <div class="breadcrumb">
+            <small>who i am</small>
+            <h1>About Ruaha</h1>
+        </div>
+    </section>
+    <!-- xxx Breadcrumb End xxx -->
 <div class="row">
         <div class="col-sm-8">
             <div class="about-wrap">
@@ -23,112 +31,77 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-4">
-            <div class="widgets-box">
-                <div class="sidebar-head"><span>Newsletter Signup</span></div>
-                <div class="sidebar-text">
-                    <p>Sign up to receive latest updates with Ruaha Blog!</p>
-                    <div class="newsletter-input">
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter Email Here">
-                    </div>
-                    <div class="newsletter-btn">
-                        <button type="submit" class="btn-default">Send <i class="fa fa-check-circle"></i></button>
-                    </div>
-                </div>
-            </div>
+    <!-- xxx Sidebar xxx -->
+    <div class="col-sm-4">
 
-            <div class="widgets-box">
-                <div class="sidebar-head"><span>Categories</span></div>
-                <div class="sidebar-text">
-                    <ul class="category">
+        <!-- xxx Widet Box xxx -->
+        <div class="widgets-box">
+            <div class="sidebar-head bg-2"><span>Recent Posts</span></div>
+            <div class="sidebar-text">
+                <ul class="sidebar-post">
+                    @foreach($recent_posts as $recent_post)
                         <li>
-                            <div class="cat-desc">
-                                <div class="category-details">
-                                    <span><a href="#">Entertainment</a></span>
-                                </div>
-                                <div class="dots"></div>
-                                <div class="category-links">
-                                    <span>(10)</span>
+                            <div class="image-thumb">
+                                <a href="{{ route('details',$recent_post->id) }}"><img src="{{ asset($recent_post->image) }}" alt=""></a>
+                            </div>
+                            <div class="post-text">
+                                <h4><a href="#">{{ $recent_post->relCategory->name }}</a></h4>
+                                <p>{{ Str::limit($recent_post->description, 80) }}</p>
+                                <div class="post-date">
+                                    <i class="fa fa-clock-o"></i> {{ $recent_post->published_date }}
                                 </div>
                             </div>
                         </li>
-                        <li>
-                            <div class="cat-desc">
-                                <div class="category-details">
-                                    <span><a href="#">Sports</a></span>
-                                </div>
-                                <div class="dots"></div>
-                                <div class="category-links">
-                                    <span>(05)</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="cat-desc">
-                                <div class="category-details">
-                                    <span><a href="#">Travel</a></span>
-                                </div>
-                                <div class="dots"></div>
-                                <div class="category-links">
-                                    <span>(15)</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="cat-desc">
-                                <div class="category-details">
-                                    <span><a href="#">Lifestyle</a></span>
-                                </div>
-                                <div class="dots"></div>
-                                <div class="category-links">
-                                    <span>(25)</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="cat-desc">
-                                <div class="category-details">
-                                    <span><a href="#">Jobs</a></span>
-                                </div>
-                                <div class="dots"></div>
-                                <div class="category-links">
-                                    <span>(105)</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="cat-desc">
-                                <div class="category-details">
-                                    <span><a href="#">Movies</a></span>
-                                </div>
-                                <div class="dots"></div>
-                                <div class="category-links">
-                                    <span>(02)</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="cat-desc">
-                                <div class="category-details">
-                                    <span><a href="#">Music</a></span>
-                                </div>
-                                <div class="dots"></div>
-                                <div class="category-links">
-                                    <span>(07)</span>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+                    @endforeach
+                </ul>
             </div>
+        </div>
+        <!-- xxx Widet Box End xxx -->
 
-            <div class="widgets-box">
-                <div class="sidebar-head"><span>From Flickr</span></div>
-                <div class="sidebar-text">
-                    <ul id="basicuse" class="photo-thumbs"></ul>
-                    <div class="clearfix"></div>
+        <!-- xxx Widet Box xxx -->
+        <div class="widgets-box">
+            <div class="sidebar-head"><span>Categories</span></div>
+            <div class="sidebar-text">
+                <ul class="category">
+                    @foreach($categories as $cat)
+                        <li>
+                            <div class="cat-desc">
+                                <div class="category-details">
+                                    <span><a href="{{ route('category.post',$cat->id) }}">{{ $cat->name }}</a></span>
+                                </div>
+                                <div class="dots"></div>
+                                <div class="category-links">
+                                    <span>{{ $cat->rel_post_count }}</span>
+                                </div>
+                            </div>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
+        <!-- xxx Widet Box End xxx -->
+
+        <!-- xxx Widet Box xxx -->
+        <div class="widgets-box">
+            <div class="sidebar-head"><span>Slider Posts</span></div>
+            <div class="sidebar-text">
+                <div class="owl-carousel" id="single-slider">
+                    @foreach($sliders as $slider)
+                        <div class="item">
+                            <a href="#"><img alt="" src="{{ asset($slider->image) }}"></a>
+                            <div class="recent-post-text">
+                                <h4><a href="#">{{ $slider->title }}</a></h4>
+                                <div class="post-date">
+                                    <i class="fa fa-clock-o"></i> {{ $slider->published_date }}
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>
+        <!-- xxx Widet Box End xxx -->
+    </div>
+    <!-- xxx Sidebar End xxx -->
     </div>
 @endsection

@@ -33,7 +33,9 @@
                 <li><a href="{{ route('about') }}">About Me</a></li>
                 <li><a href="#">Category</a>
                     <ul class="dropdown">
-                        <li><a href="standard-post.html">Standard Post.............()</a></li>
+                        @foreach($categories as $cat)
+                        <li><a href="{{ route('category.post',$cat->id) }}">{{ $cat->name }}.............{{ $cat->rel_post_count }}</a></li>
+                        @endforeach
                     </ul>
                 </li>
 

@@ -1,44 +1,59 @@
 @extends('frontend.layout.masters')
 @section('content')
 <div class="row">
-                <div class="col-md-8">
-                    <div class="about-wrap">
-                        <div id="map-holder">
-                            <div id="map_extended">
-                                <p>This will be replaced with the Google Map.</p>
-                            </div>
-                        </div>
-                        <div class="blog-outer">
-                            <h3>Say Hello! Its Free</h3>
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div>
-                                        <div id="sucessmessage"> </div>
-                                    </div>
-                                </div>
-                                <form action="#" method="post" id="contact_form" novalidate="novalidate">
-                                    <div class="col-sm-4">
-                                        <input type="text" name="name" id="name" class="form-control" placeholder="Name">
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="email" id="email" class="form-control" placeholder="Email">
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="subject" id="subject" class="form-control" placeholder="Subject">
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <textarea name="comment" id="comment" class="form-control" rows="8" placeholder="Message"></textarea>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <button type="submit" class="form-btn">Contact us</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
 
-
+    <div class="col-sm-8">
+    @foreach($posts as $post)
+        <!-- xxx Post Loop xxx -->
+            <div class="blog-post">
+                <div class="item-thumbs">
+                    <img src="{{ asset($post->image) }}" alt="Slider Image">
+                </div>
+                <div class="blog-outer">
+                    <div class="meta">
+                        <span><a href="#"><i class="fa fa-tag"></i> {{ $post->relCategory->name }}</a></span>
+                        <span class="date">{{ $post->published_date }}</span>
+                        <span><a href="#" data-toggle="tooltip" title="" data-original-title="25" class="like-icons"><i class="fa fa-heart-o"></i></a></span>
+                        <span><a href="#" data-toggle="tooltip" title="" data-original-title="12" class="comments-icon"><i class="fa fa-comments-o"></i></a></span>
+                    </div>
+                    <h3 class="blog-title"><a href="#">{{ $post->title }}</a></h3>
+                    <div class="admin-text">
+                        <p><img src="{{ asset($post->relUser->image) }}" alt="" class="img-circle" style="width: 10%"></p>
+                        <i>By <a href="#">{{ $post->relUser->name }}</a></i>
                     </div>
                 </div>
+                <div class="blog-text">
+                    {{ $post->description }}
+                </div>
+                <div class="blog-bottom">
+                    <div class="social-icons pull-left">
+                        <ul>
+                            <li><a href="#" data-toggle="tooltip" title="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#" data-toggle="tooltip" title="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#" data-toggle="tooltip" title="" data-original-title="Pinterest"><i class="fa fa-pinterest"></i></a></li>
+                            <li><a href="#" data-toggle="tooltip" title="" data-original-title="Google Plus"><i class="fa fa-google-plus"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="pull-right"><a href="#" class="more-links">Read More</a></div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <!-- xxx Post Loop End xxx -->
+    @endforeach
+    <!-- xxx Pagination Style xxx -->
+        <div class="pagination-wrap text-right">
+            <ul class="pagination">
+                <li><a href="#"><i class="fa fa-angle-left"></i></a></li>
+                <li class="active"><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+            </ul>
+        </div>
+        <!-- xxx Pagination End xxx -->
+    </div>
     <!-- xxx Sidebar xxx -->
     <div class="col-sm-4">
 
@@ -50,7 +65,7 @@
                     @foreach($recent_posts as $recent_post)
                         <li>
                             <div class="image-thumb">
-                                <a href="{{ route('details',$recent_post->id) }}"><img src="{{ asset($recent_post->image) }}" alt=""></a>
+                                <a href="#"><img src="{{ asset($recent_post->image) }}" alt=""></a>
                             </div>
                             <div class="post-text">
                                 <h4><a href="#">{{ $recent_post->relCategory->name }}</a></h4>
@@ -111,5 +126,5 @@
         <!-- xxx Widet Box End xxx -->
     </div>
     <!-- xxx Sidebar End xxx -->
-            </div>
+</div>
 @endsection

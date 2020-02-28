@@ -38,8 +38,8 @@
                                 <div class="meta">
                                     <span><a href="#"><i class="fa fa-tag"></i> {{ $post->relCategory->name }}</a></span>
                                     <span class="date">{{ $post->published_date }}</span>
-                                    <span><a href="#" data-toggle="tooltip" title="" data-original-title="25" class="like-icons"><i class="fa fa-heart-o"></i></a></span>
-                                    <span><a href="#" data-toggle="tooltip" title="" data-original-title="12" class="comments-icon"><i class="fa fa-comments-o"></i></a></span>
+{{--                                    <span><a href="#" data-toggle="tooltip" title="" data-original-title="25" class="like-icons"><i class="fa fa-heart-o"></i></a></span>--}}
+{{--                                    <span><a href="#" data-toggle="tooltip" title="" data-original-title="12" class="comments-icon"><i class="fa fa-comments-o"></i></a></span>--}}
                                 </div>
                                 <h3 class="blog-title"><a href="#">{{ $post->title }}</a></h3>
                                 <div class="admin-text">
@@ -92,7 +92,7 @@
                                 @foreach($recent_posts as $recent_post)
                                 <li>
                                     <div class="image-thumb">
-                                        <a href="#"><img src="{{ asset($recent_post->image) }}" alt=""></a>
+                                        <a href="{{ route('details',$recent_post->id) }}"><img src="{{ asset($recent_post->image) }}" alt=""></a>
                                     </div>
                                     <div class="post-text">
                                         <h4><a href="#">{{ $recent_post->relCategory->name }}</a></h4>
@@ -117,7 +117,7 @@
                                 <li>
                                     <div class="cat-desc">
                                         <div class="category-details">
-                                            <span><a href="#">{{ $cat->name }}</a></span>
+                                            <span><a href="{{ route('category.post',$cat->id) }}">{{ $cat->name }}</a></span>
                                         </div>
                                         <div class="dots"></div>
                                         <div class="category-links">

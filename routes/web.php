@@ -47,5 +47,14 @@ Route::get('contact','FrontendController@contact')->name('contact');
 //about me
 Route::get('about','FrontendController@about')->name('about');
 
-//about me
+// slider me
 Route::get('slider','FrontendController@slider')->name('slider');
+
+// category_post me
+Route::get('category_post/{category_id}','FrontendController@category_post')->name('category.post');
+
+// posts me
+Route::get('posts/{category_id}','FrontendController@posts')->name('posts');
+
+// details me
+Route::get('details/{post_id}','FrontendController@details')->name('details');
