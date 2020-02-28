@@ -16,27 +16,26 @@
                                         <div id="sucessmessage"> </div>
                                     </div>
                                 </div>
-                                <form action="#" method="post" id="contact_form" novalidate="novalidate">
+                                <form action="{{ route('sendmail') }}" method="post"  novalidate="novalidate">
+                                    @csrf
                                     <div class="col-sm-4">
-                                        <input type="text" name="name" id="name" class="form-control" placeholder="Name">
+                                        <input type="text" name="name" id="name" class="form-control" placeholder="Name" style="margin-bottom: 10px;">
                                     </div>
                                     <div class="col-sm-4">
-                                        <input type="text" name="email" id="email" class="form-control" placeholder="Email">
+                                        <input type="email" name="email" id="email" class="form-control" placeholder="Email" style="margin-bottom: 10px;">
                                     </div>
                                     <div class="col-sm-4">
-                                        <input type="text" name="subject" id="subject" class="form-control" placeholder="Subject">
+                                        <input type="text" name="subject" id="subject" class="form-control" placeholder="Subject" style="margin-bottom: 10px;">
                                     </div>
                                     <div class="col-sm-12">
                                         <textarea name="comment" id="comment" class="form-control" rows="8" placeholder="Message"></textarea>
                                     </div>
-                                    <div class="col-sm-12">
+                                    <div class="col-sm-12" style="margin-top: 10px;">
                                         <button type="submit" class="form-btn">Contact us</button>
                                     </div>
                                 </form>
                             </div>
                         </div>
-
-
                     </div>
                 </div>
     <!-- xxx Sidebar xxx -->

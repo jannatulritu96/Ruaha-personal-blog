@@ -132,7 +132,7 @@
                                         <input type="radio" value="1" id="Approve" name="banner_post" checked>
                                         <label class="checkbox-inline" for="Approve">Approve</label>
 
-                                        <input type="radio" value="2" id="Decline" name="banner_post"}} style="margin-left: 10px;">
+                                        <input type="radio" value="2" id="Decline" name="banner_post" style="margin-left: 10px;">
                                         <label class="checkbox-inline" for="Decline">Decline</label>
                                     </div>
                                 </div>
@@ -143,7 +143,7 @@
                                         <input type="radio" value="1" id="Approve1" name="slider_post" checked>
                                         <label class="checkbox-inline" for="Approve1">Approve</label>
 
-                                        <input type="radio" value="2" id="Decline1" name="slider_post"}} style="margin-left: 10px;">
+                                        <input type="radio" value="2" id="Decline1" name="slider_post" style="margin-left: 10px;">
                                         <label class="checkbox-inline" for="Decline1">Decline</label>
                                     </div>
                                 </div>

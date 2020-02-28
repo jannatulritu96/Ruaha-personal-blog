@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\category;
 use App\post;
 use App\User;
+//use Faker\Provider\Image;
 use Illuminate\Http\Request;
+use Image;
 
 class PostController extends Controller
 {
@@ -145,13 +147,33 @@ class PostController extends Controller
         $post->banner_post = $request->banner_post;
         $post->slider_post = $request->slider_post;
 
-        if($request->hasFile('image'))
-        {
-            $photo= $request->file('image');
-            $photo->move('assets/post/',$photo->getClientOriginalName());
-            $post->image = 'assets/post/'.$photo->getClientOriginalName();
-        }
-        $post->save();
+
+//        if($request->hasFile('image')) {
+//            if (!file_exists(public_path('assets/post/'.$post->image))){
+//                $post->image = null;
+//            }else{
+//                unlink('assets/post/'. $post->image);
+//            }
+//
+//            $image = $request->file('image');
+//            $imageName = $image->getClientOriginalExtension();
+//            $fileName = time() . "." . $imageName;
+//            $directory = 'assets/post/';
+//            $imageUrl = $directory.$fileName;
+//            Image::make($image)->resize(80, 30)->save($imageUrl);
+//            $post->image = $fileName;
+//        }
+
+
+
+
+         if($request->hasFile('image'))
+         {
+             $photo= $request->file('image');
+             $photo->move('assets/post/',$photo->getClientOriginalName());
+             $post->image = 'assets/post/'.$photo->getClientOriginalName();
+         }
+         $post->save();
 
         if ($post) {
             session()->flash('success','Post stored successfully');

@@ -120,10 +120,33 @@
                                         <input type="radio" value="1" id="Published" name="status" {{$post->status == 'Published' ? 'checked' : ''}}>
                                         <label class="checkbox-inline" for="Published">Published</label>
 
-                                        <input type="radio" value="2" id="Unpublished" name="status"}} style="margin-left: 10px;" {{$post->status == 'Unpublished' ? 'checked' : ''}}>
+                                        <input type="radio" value="2" id="Unpublished" name="status" style="margin-left: 10px;" {{$post->status == 'Unpublished' ? 'checked' : ''}}>
                                         <label class="checkbox-inline" for="Unpublished">Unpublished</label>
                                     </div>
                                 </div>
+
+                                <div class="box-body" style="width: 60%;">
+                                    <div class="form-group" style="margin-left: 5px;">
+                                        <label for="banner_post" style="margin-right: 10px">Banner Post: </label>
+                                        <input type="radio" value="1" id="Approve" name="banner_post" {{$post->banner_post == 'Approve' ? 'checked' : ''}}>
+                                        <label class="checkbox-inline" for="Approve">Approve</label>
+
+                                        <input type="radio" value="2" id="Decline" name="banner_post" style="margin-left: 10px;" {{$post->banner_post == 'Decline' ? 'checked' : ''}}>
+                                        <label class="checkbox-inline" for="Decline">Decline</label>
+                                    </div>
+                                </div>
+
+                                <div class="box-body" style="width: 60%;">
+                                    <div class="form-group" style="margin-left: 5px;">
+                                        <label for="slider_post" style="margin-right: 10px">Slider Post: </label>
+                                        <input type="radio" value="1" id="Approve1" name="slider_post" {{$post->slider_post == 'Approve' ? 'checked' : ''}}>
+                                        <label class="checkbox-inline" for="Approve1">Approve</label>
+
+                                        <input type="radio" value="2" id="Decline1" name="slider_post" style="margin-left: 10px;" {{$post->slider_post == 'Decline' ? 'checked' : ''}}>
+                                        <label class="checkbox-inline" for="Decline1">Decline</label>
+                                    </div>
+                                </div>
+
 
                                 <div class="box-footer pull-right">
                                     <button type="submit" class="btn btn-primary">Create</button>

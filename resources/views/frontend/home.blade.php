@@ -9,7 +9,7 @@
                 <img src="{{ asset($banner->image) }}" alt="Slider Image">
                 <div class="blog-post">
                     <div class="blog-outer">
-                        <h3 class="blog-title"><a href="#">{{ $banner->title }}</a></h3>
+                        <h3 class="blog-title"><a href="{{ route('details',$banner->id) }}">{{ $banner->title }}</a></h3>
                         <div class="meta">
                             <span><a href="#"><i class="fa fa-tags"></i>{{ $banner->relUser->name }}</a></span>
                             <span class="date">{{ $banner->published_date }}</span>

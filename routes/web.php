@@ -41,20 +41,22 @@ Route::middleware('auth')->group(function (){
 
 });
 
-//contact us
+// contact us
 Route::get('contact','FrontendController@contact')->name('contact');
+// mail send
+Route::post('mail','FrontendController@sendmail')->name('sendmail');
 
-//about me
+//about route
 Route::get('about','FrontendController@about')->name('about');
 
-// slider me
+// slider route
 Route::get('slider','FrontendController@slider')->name('slider');
 
-// category_post me
+// category_post route
 Route::get('category_post/{category_id}','FrontendController@category_post')->name('category.post');
 
-// posts me
-Route::get('posts/{category_id}','FrontendController@posts')->name('posts');
+// posts route
+Route::get('posts/{id}','FrontendController@posts')->name('posts');
 
-// details me
+// details route
 Route::get('details/{post_id}','FrontendController@details')->name('details');
