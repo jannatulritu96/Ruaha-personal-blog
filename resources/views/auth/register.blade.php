@@ -32,7 +32,6 @@
                     <h4 class="card-title">Register</h4>
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
-
                         <div class="form-group">
                             <label for="name">{{ __('Name') }}</label>
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>

@@ -32,6 +32,8 @@
                     <h4 class="card-title">Login</h4>
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
+                        @include('admin.layouts._validation_messages')
+                        @include('admin.layouts._messages')
                         <div class="form-group">
                             <label for="exampleInputEmail1">Email address</label>
                             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>

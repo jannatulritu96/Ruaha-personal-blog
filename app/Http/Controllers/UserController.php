@@ -185,14 +185,6 @@ class UserController extends Controller
             return response()->json(['success' => false, 'Whoops! Status not updated', 'status' => 401], 200);
         }
     }
-    public function Permission($id)
-    {
-        $user = User::find($id);
-        if($user){
-            return response()->json(['status'=>'success', 'data'=>$user]);
-        }
-        return response()->json(['status'=>'fail']);
-    }
 
     public function addDecline(Request $request, $id)
     {

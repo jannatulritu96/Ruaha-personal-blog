@@ -20,9 +20,9 @@ Auth::routes();
 Route::GET('password-change', 'DashboardController@showResetForm')->name('password.change');
 Route::POST('password-update', 'DashboardController@updatepassword')->name('update.password');
 
-//Auth::routes([
-//    'register' => false,
-//]);
+Auth::routes([
+    'register' => true,
+]);
 
 Route::GET('/','FrontendController@index')->name('home');
 
@@ -63,3 +63,4 @@ Route::GET('posts/{id}','FrontendController@posts')->name('posts');
 
 // details route
 Route::GET('details/{post_id}','FrontendController@details')->name('details');
+
