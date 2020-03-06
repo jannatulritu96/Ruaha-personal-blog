@@ -56,6 +56,7 @@
 {{--                    </ul>--}}
 {{--                </li>--}}
                 <li><a href="{{ route('contact') }}">Contact Us</a></li>
+                <li><a href="{{ route('login') }}">Sign in</a></li>
             </ul>
         </div>
     </div>

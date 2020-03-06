@@ -1,6 +1,6 @@
 @extends('frontend.layout.master')
 @section('content')
-
+{{--    @if(Auth::user()->type == 2)--}}
     <!-- xxx Main SLider xxx -->
     <section class="main-slider">
         <div class="owl-carousel" id="main-slider">
@@ -11,7 +11,7 @@
                     <div class="blog-outer">
                         <h3 class="blog-title"><a href="{{ route('details',$banner->id) }}">{{ $banner->title }}</a></h3>
                         <div class="meta">
-                            <span><a href="#"><i class="fa fa-tags"></i>{{ $banner->relUser->name }}</a></span>
+{{--                            <span><a href="#"><i class="fa fa-tags"></i>{{ $banner->relUser->name }}</a></span>--}}
                             <span class="date">{{ $banner->published_date }}</span>
                         </div>
                     </div>
@@ -157,4 +157,5 @@
         </div>
     </section>
     <!-- xxx Body Content xxx -->
+{{--    @endif--}}
 @endsection

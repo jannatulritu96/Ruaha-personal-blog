@@ -15,7 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $sql = User::where('type','Author')->select('*');
+        $sql = User::where('type','2')->select('*');
         $render = [];
 
 //        if(isset($request->search)){
@@ -68,7 +68,7 @@ class UserController extends Controller
 
         $users = User::create([
             'name' => $request->name,
-            'type' => $request->type,
+            'type' => 2,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'details' => $request->details,
@@ -184,5 +184,26 @@ class UserController extends Controller
         } else {
             return response()->json(['success' => false, 'Whoops! Status not updated', 'status' => 401], 200);
         }
+    }
+    public function Permission($id)
+    {
+        $user = User::find($id);
+        if($user){
+            return response()->json(['status'=>'success', 'data'=>$user]);
+        }
+        return response()->json(['status'=>'fail']);
+    }
+
+    public function addDecline(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+        if ($user->update([
+            'permission' => $request->permission
+        ])) {
+            return response()->json(['status' => 'success']);
+        }
+        return response()->json(['status' => 'fail']);
+
+//        return redirect()->route('user.index');
     }
 }

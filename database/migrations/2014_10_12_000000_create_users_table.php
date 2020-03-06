@@ -15,7 +15,7 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->enum('type',['Admin','Author']);
+            $table->tinyInteger('type')->default('2');
             $table->string('name');
             $table->string('image')->nullable();
             $table->text('details')->nullable();

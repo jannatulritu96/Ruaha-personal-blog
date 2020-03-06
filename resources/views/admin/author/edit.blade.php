@@ -54,10 +54,10 @@
                                 <div class="box-body" style="width: 60%;">
                                     <div class="form-group" style="margin-left: 5px;">
                                         <label for="Admin" style="margin-right: 10px">User type: </label>
-                                        <input type="radio" value="1" id="Admin" name="type" {{$user->type == 'Admin' ? 'checked' : ''}}>
+                                        <input type="radio" value="1" id="Admin" name="type" {{$user->type == 1 ? 'checked' : ''}}>
                                         <label class="checkbox-inline" for="Admin">Admin</label>
 
-                                        <input type="radio" value="2" id="Author" name="type"}} style="margin-left: 10px;" {{$user->type == 'Author' ? 'checked' : ''}}>
+                                        <input type="radio" value="2" id="Author" name="type"}} style="margin-left: 10px;" {{$user->type == 2 ? 'checked' : ''}}>
                                         <label class="checkbox-inline" for="Author">Author</label>
                                     </div>
                                 </div>

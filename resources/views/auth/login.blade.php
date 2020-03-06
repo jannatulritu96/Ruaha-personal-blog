@@ -67,6 +67,9 @@
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
+                    <div class="form-group" style="color: red;text-align: right">
+                        <a href="{{route('register')}}" >Register a new membership</a>
+                    </div>
                 </div>
             </div>
         </div>

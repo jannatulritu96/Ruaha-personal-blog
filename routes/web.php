@@ -12,51 +12,54 @@
 */
 Auth::routes();
 
-Route::get('login', function () {
-    return redirect()->route('dashboard');
-});
+//Route::get('login', function () {
+//    return redirect()->route('dashboard');
+//});
 
 // Change Password
-Route::get('password-change', 'DashboardController@showResetForm')->name('password.change');
-Route::post('password-update', 'DashboardController@updatepassword')->name('update.password');
+Route::GET('password-change', 'DashboardController@showResetForm')->name('password.change');
+Route::POST('password-update', 'DashboardController@updatepassword')->name('update.password');
 
-Auth::routes([
-    'register' => false,
-]);
+//Auth::routes([
+//    'register' => false,
+//]);
 
-Route::get('/','FrontendController@index')->name('home');
+Route::GET('/','FrontendController@index')->name('home');
 
 Route::middleware('auth')->group(function (){
     // Dashboard
-    Route::get('dashboard','DashboardController@index')->name('dashboard');
+    Route::GET('dashboard','DashboardController@index')->name('dashboard');
     // Category route
     Route::resource('category','CategoryController');
-    Route::post('/category/change-activity/{id}', 'CategoryController@changeActivity')->name('category.change-activity');
+    Route::POST('/category/change-activity/{id}', 'CategoryController@changeActivity')->name('category.change-activity');
     // Post route
     Route::resource('post','PostController');
-    Route::post('/post/change-activity/{id}', 'PostController@changeActivity')->name('post.change-activity');
+    Route::POST('/post/change-activity/{id}', 'PostController@changeActivity')->name('post.change-activity');
     //Author route
     Route::resource('user','UserController');
-    Route::post('/user/change-activity/{id}', 'UserController@changeActivity')->name('user.change-activity');
+    Route::POST('/user/change-activity/{id}', 'UserController@changeActivity')->name('user.change-activity');
+    Route::GET('/user/get-permission/{id}', 'UserController@Permission');
+    Route::POST('/user/change-permission/{id}', 'UserController@addPermission');
+    Route::POST('/user/change-decline/{id}', 'UserController@addDecline');
 
 });
 
 // contact us
-Route::get('contact','FrontendController@contact')->name('contact');
+Route::GET('contact','FrontendController@contact')->name('contact');
 // mail send
-Route::post('mail','FrontendController@sendmail')->name('sendmail');
+Route::POST('mail','FrontendController@sendmail')->name('sendmail');
 
 //about route
-Route::get('about','FrontendController@about')->name('about');
+Route::GET('about','FrontendController@about')->name('about');
 
 // slider route
-Route::get('slider','FrontendController@slider')->name('slider');
+Route::GET('slider','FrontendController@slider')->name('slider');
 
 // category_post route
-Route::get('category_post/{category_id}','FrontendController@category_post')->name('category.post');
+Route::GET('category_post/{category_id}','FrontendController@category_post')->name('category.post');
 
 // posts route
-Route::get('posts/{id}','FrontendController@posts')->name('posts');
+Route::GET('posts/{id}','FrontendController@posts')->name('posts');
 
 // details route
-Route::get('details/{post_id}','FrontendController@details')->name('details');
+Route::GET('details/{post_id}','FrontendController@details')->name('details');
