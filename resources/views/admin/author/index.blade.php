@@ -185,23 +185,6 @@
     <script>
         let edit_id = null;
 
-        function updateStatus(id) {
-            let data = {
-                _token: '{{ csrf_token() }}'
-            };
-            $.ajax({
-                type: 'post',
-                url: 'user/change-activity/' + id,
-                cache: false,
-                data: data,
-                success: function (results) {
-
-                    if (results.success === true) {
-                        window.location.reload()
-                    }
-                }
-            });
-        }
 
         function updatePermission(id) {
             edit_id = id;
@@ -233,6 +216,26 @@
                 }
             });
         }
+
+        function updateStatus(id) {
+            let data = {
+                _token: '{{ csrf_token() }}'
+            };
+            $.ajax({
+                type: 'post',
+                url: 'user/change-activity/' + id,
+                cache: false,
+                data: data,
+                success: function (results) {
+
+                    if (results.success === true) {
+                        window.location.reload()
+                    }
+                }
+            });
+        }
+
+
 
         function deleteconfirm(id) {
             swal({

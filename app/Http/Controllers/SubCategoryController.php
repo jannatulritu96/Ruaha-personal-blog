@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\category;
+use App\SubCategory;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class SubCategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,10 +16,10 @@ class CategoryController extends Controller
     public function index(Request $request)
     {
 
-        $sql = Category::withCount('relPost')->select('*');
+        $sql = SubCategory::with('relCategory')->select('*');
         $render = [];
 
-       if (isset($request->name)) {
+        if (isset($request->name)) {
             $sql->where('name', 'like', '%'.$request->name.'%');
             $render['name'] = $request->name;
         }
@@ -32,7 +33,7 @@ class CategoryController extends Controller
 
         $status = (isset($request->status)) ? $request->status : '';
 
-        return view('admin.category.index',compact('data','status'));
+        return view('admin.sub-category.index',compact('data','status'));
     }
 
     /**
@@ -42,7 +43,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.category.create');
+        $categories = Category::where('status','1')->get();
+        return view('admin.sub-category.create',compact('categories'));
     }
 
     /**
@@ -53,20 +55,24 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+
+//        dd($request->all());
         $request->validate([
+            'cat_id'=>'required',
             'name'=>'required',
         ]);
 
-        $categories = Category::create([
+        $sub_category = SubCategory::create([
+            'cat_id' => $request->cat_id,
             'name' => $request->name
         ]);
 
-        if ($categories) {
-            session()->flash('success','Category stored successfully');
+        if ($sub_category) {
+            session()->flash('success','Sub category stored successfully');
         } else {
             session()->flash('error','Something is wrong!');
         }
-        return redirect()->route('category.index');
+        return redirect()->route('sub_category.index');
     }
 
     /**
@@ -88,9 +94,9 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $category  = Category::findOrFail($id);
-
-        return view('admin.category.edit',compact('category'));
+        $sub_category  = SubCategory::findOrFail($id);
+        $category = Category::where('status','1')->get();
+        return view('admin.sub-category.edit',compact('category','sub_category'));
     }
 
     /**
@@ -102,15 +108,16 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $category = Category::where(['id'=> $id])->update([
+        $sub_category = SubCategory::where(['id'=> $id])->update([
+            'cat_id'=>$request->cat_id,
             'name' => $request->name,
         ]);
-        if ($category) {
-            session()->flash('success','Category stored successfully');
+        if ($sub_category) {
+            session()->flash('success','Sub category stored successfully');
         } else {
-            session()->flash('success','Category stored successfully');
+            session()->flash('success','Sub category stored successfully');
         }
-        return redirect()->route('category.index');
+        return redirect()->route('sub_category.index');
     }
 
     /**
@@ -121,15 +128,15 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $delete = Category::findOrFail($id)->delete();
+        $delete = SubCategory::findOrFail($id)->delete();
 
 
         if ($delete == 1) {
             $success = true;
-            $message = "Category deleted successfully";
+            $message = "Sub category deleted successfully";
         } else {
             $success = true;
-            $message = "Category not found";
+            $message = "Sub category not found";
         }
 
         //  Return response
@@ -140,14 +147,14 @@ class CategoryController extends Controller
     }
     public function changeActivity($id)
     {
-        $category = Category::find($id);
+        $sub_category = SubCategory::find($id);
         $status = 0;
-        if ($category->status == 0) {
+        if ($sub_category->status == 0) {
             $status = 1;
         }
-        $category = $category->update(['status' => $status]);
+        $sub_category = $sub_category->update(['status' => $status]);
 
-        if ($category) {
+        if ($sub_category) {
             return response()->json(['success' => true, 'Status updated Successfully', 'status' => 200], 200);
         } else {
             return response()->json(['success' => false, 'Whoops! Status not updated', 'status' => 401], 200);

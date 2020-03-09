@@ -38,3 +38,6 @@
 <script src="{{ asset('assets/assets/libs/select2/dist/js/select2.full.min.js') }}"></script>
 <script src="{{ asset('assets/assets/libs/select2/dist/js/select2.min.js') }}"></script>
 <script src="{{ asset('assets/dist/js/pages/forms/select2/select2.init.js') }}"></script>
+
+<!-- Select2 -->
+<script src="{{ asset('assets/assets/select2/js/select2.full.min.js')}}"></script>

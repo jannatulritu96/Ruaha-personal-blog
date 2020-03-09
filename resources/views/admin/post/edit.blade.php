@@ -60,6 +60,22 @@
                                 </div>
 
                                 <div class="form-group" style="margin-left: 5px;">
+                                    <label for="sub_category">Sub Category<span
+                                            style="color: red">*</span></label>
+                                    <select class="form-control select2" style="width: 98%;" name="sub_category">
+                                        <option>Select Sub Category</option>
+                                        @foreach($sub_category as $sub_cat)
+                                            <option value="{{$sub_cat->id}}"  @if($post->sub_category == $sub_cat->id) selected @endif>{{ $sub_cat->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('sub_category')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group" style="margin-left: 5px;">
                                     <label for="title">Title<span
                                             style="color: red">*</span></label>
                                     <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" placeholder="Title" value="{{ $post->title }}"  style="width: 98%;">

@@ -28,6 +28,8 @@
                             @csrf
                             @include('.admin.layouts._messages')
                             <div class="box-body" style="width: 60%;margin: 0 auto;">
+
+                                @if(Auth::user()->type == 1)
                                 <div class="form-group" style="margin-left: 5px;">
                                     <label for="name">Author Name<span
                                             style="color: red">*</span></label>
@@ -43,17 +45,37 @@
                                     </span>
                                     @enderror
                                 </div>
+                                @endif
 
                                 <div class="form-group" style="margin-left: 5px;">
                                     <label for="category_id">Category<span
                                             style="color: red">*</span></label>
-                                    <select class="form-control select2" style="width: 98%;" name="category_id">
+                                    <select class="form-control select2" style="width: 98%;" name="category_id" id="category_id" onchange="showSubCat()">
                                         <option>Select Category</option>
                                         @foreach($categories as $cat)
-                                            <option value="{{$cat->id}}">{{ $cat->name }}</option>
+                                            <option value="{{$cat->id}}" >{{ $cat->name }}</option>
                                         @endforeach
                                     </select>
                                     @error('category_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group" style="margin-left: 5px;">
+                                    <label for="category_id">Sub Category<span
+                                            style="color: red">*</span></label>
+                                    <select class="form-control" style="width: 98%;" name="sub_category">
+                                        <div id="sub_cat">
+                                            <option>Select Sub Category</option>
+                                        </div>
+
+{{--                                        @foreach($sub_categories as $cat)--}}
+{{--                                            <option value="{{$cat->cat_id}}">{{ $cat->name }}</option>--}}
+{{--                                        @endforeach--}}
+                                    </select>
+                                    @error('sub_category')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -176,8 +198,20 @@
                 reader.readAsDataURL(input.files[0]);
             }
         }
+
+        function showSubCat() {
+            var cat_id = $('#category_id').val();
+
+            $.ajax({
+                method: "GET",
+                url: '/post/sub_cat/' + cat_id,
+
+                success: function(res){
+                    $('#sub_cat').html(res.data);
+                }});
+
+        }
     </script>
 @endsection
-
 
 

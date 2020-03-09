@@ -17,4 +17,12 @@ class Post extends Model
     {
         return $this->belongsTo('App\Category','category_id','id');
     }
+    public function relSubCategory()
+    {
+        return $this->belongsTo('App\SubCategory','sub_category','id');
+    }
+    public function relAssigntag()
+    {
+        return $this->hasMany('App\Assigntag','post_id','id')->with('tag_details');
+    }
 }

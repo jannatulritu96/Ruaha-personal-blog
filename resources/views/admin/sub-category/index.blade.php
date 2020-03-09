@@ -12,7 +12,7 @@
                     <ol class="breadcrumb mb-0 justify-content-end p-0">
                         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
                         <li class="breadcrumb-item active"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Category list</li>
+                        <li class="breadcrumb-item active" aria-current="page">Sub Category list</li>
                     </ol>
                 </nav>
             </div>
@@ -27,10 +27,10 @@
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-6">
-                                <h4 class="card-title">Category list</h4>
+                                <h4 class="card-title">Sub Category list</h4>
                             </div>
                             <div class="col-md-6">
-                                <a href="{{ route('category.create') }}" class="btn btn-primary" style="float: right;margin-bottom: 17px;">Create Category</a>
+                                <a href="{{ route('sub_category.create') }}" class="btn btn-primary" style="float: right;margin-bottom: 17px;">Sub Category Create</a>
                             </div>
                         </div>
                     </div>
@@ -42,7 +42,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-12 col-md-6">
-                                    <form method="get" class="form-horizontal" action="{{route('category.index')}}" >
+                                    <form method="get" class="form-horizontal" action="{{route('sub_category.index')}}" >
                                         <div class="dataTables_filter">
                                             <button type="submit" class="btn btn-primary" style="float: right;margin-left: 5px;padding: 2.1px 12px;">Search</button>
                                         </div>
@@ -54,8 +54,8 @@
                                             </select>
                                         </div>
                                         <div id="default_order_filter" class="dataTables_filter" style="float: right;margin-right: 5px">
-                                            <input type="text" class="form-control form-control-sm" name="name" placeholder="Category"
-                                                   value="{{Request::get('category')}}" onchange="search_post()">
+                                            <input type="text" class="form-control form-control-sm" name="name" placeholder="Sub Category"
+                                                   value="{{Request::get('sub_category')}}" onchange="search_post()">
                                         </div>
 
                                     </form>
@@ -67,19 +67,20 @@
                                         <thead>
                                           <tr>
                                                 <th>Sl</th>
-                                                <th>Name</th>
-{{--                                                <th>Total Posts</th>--}}
+                                                <th>Category</th>
+                                                <th>Sub Category</th>
+                                                <th>Total Posts</th>
                                                 <th class="text-center">Status</th>
                                                 <th class="text-right">Action</th>
                                             </tr>
                                      </thead>
                                      <tbody>
-{{--                                     {{ dd($data) }}--}}
                                         @foreach($data as $category)
                                         <tr>
                                             <td>{{ $category->id }}</td>
+                                            <td>{{ $category->relcategory->name }}</td>
                                             <td>{{ $category->name }}</td>
-{{--                                            <td>{{ $category->rel_post_count }}</td>--}}
+                                            <td>{{ $category->total_posts }}</td>
                                             <td class="text-center">
                                                 @if($category->status == 1)
                                                     <span style="font-size: 16px;" class="badge badge-pill badge-success">Active</span>
@@ -95,7 +96,7 @@
                                                         <span class="sr-only">Toggle Dropdown</span>
                                                     </button>
                                                     <ul class="dropdown-menu pull-right" role="menu">
-                                                        <li><a class="dropdown-item" href="{{ route('category.edit',$category->id) }}"><i class="fa fa-edit"></i> Edit</a></li>
+                                                        <li><a class="dropdown-item" href="{{ route('sub_category.edit',$category->id) }}"><i class="fa fa-edit"></i> Edit</a></li>
                                                         <li><a class="dropdown-item" href="" onclick="updateStatus({{ $category->id }})"><i class="fa fa-fw fa-search-plus"></i> Status</a></li>
                                                         <li><div role="separator" class="dropdown-divider"></div></li>
                                                         <li>
@@ -131,7 +132,7 @@
             };
             $.ajax({
                 type: 'post',
-                url: 'category/change-activity/' + id,
+                url: 'sub_category/change-activity/' + id,
                 cache: false,
                 data: data,
                 success: function (results) {
@@ -155,7 +156,7 @@
                 if (e.value === true) {
                     $.ajax({
                         type: 'DELETE',
-                        url: "category/" + id,
+                        url: "sub_category/" + id,
                         data: {_token: '{{  @csrf_token() }}' },
                         dataType: 'JSON',
                         success: function (results) {
