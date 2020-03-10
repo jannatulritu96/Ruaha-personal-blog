@@ -12,7 +12,7 @@
                     <ol class="breadcrumb mb-0 justify-content-end p-0">
                         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
                         <li class="breadcrumb-item active"><a href="{{ route('sub_category.index') }}">Sub Category list</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Sub Category edit</li>
+                        <li class="breadcrumb-item active" aria-current="page">Sub Category Edit</li>
                     </ol>
                 </nav>
             </div>
@@ -23,7 +23,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Sub Category create form</h4>
+                        <h4 class="card-title">Sub Category Edit Form</h4>
                         <form method="post" class="form-horizontal" action="{{ route('sub_category.update',$sub_category) }}" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')

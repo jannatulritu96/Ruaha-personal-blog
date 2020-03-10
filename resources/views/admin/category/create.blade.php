@@ -23,7 +23,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Author create form</h4>
+                        <h4 class="card-title">Category create form</h4>
                         <form method="post" class="form-horizontal" action="{{ route('category.store') }}" enctype="multipart/form-data">
                             @csrf
                             @include('.admin.layouts._messages')

@@ -66,10 +66,8 @@
                                 <div class="form-group" style="margin-left: 5px;">
                                     <label for="category_id">Sub Category<span
                                             style="color: red">*</span></label>
-                                    <select class="form-control" style="width: 98%;" name="sub_category">
-                                        <div id="sub_cat">
-                                            <option>Select Sub Category</option>
-                                        </div>
+                                    <select class="form-control" id="sub_cat" style="width: 98%;" name="sub_category">
+                                        <option>Select Sub Category</option>
 
 {{--                                        @foreach($sub_categories as $cat)--}}
 {{--                                            <option value="{{$cat->cat_id}}">{{ $cat->name }}</option>--}}

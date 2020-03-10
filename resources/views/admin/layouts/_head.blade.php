@@ -6,7 +6,7 @@
 <meta name="author" content="">
 <!-- Favicon icon -->
 <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/assets/images/favicon.png') }}">
-<title>Ruaha</title>
+<title>Laravel</title>
 <!-- chartist CSS -->
 <link href="{{ asset('assets/assets/libs/chartist/dist/chartist.min.css') }}" rel="stylesheet">
 <link href="{{ asset('assets/assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css') }}" rel="stylesheet">
