@@ -68,6 +68,7 @@ class UserController extends Controller
 
         $users = User::create([
             'name' => $request->name,
+            'slug_name' => str_slug($request->name),
             'type' => 2,
             'email' => $request->email,
             'password' => Hash::make($request->password),
@@ -103,12 +104,12 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $slug_name
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug_name)
     {
-        $user  = User::findOrFail($id);
+        $user  = User::where('slug_name',$slug_name)->first();
         return view('admin.author.edit',compact('user'));
 
     }
@@ -122,20 +123,23 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = User::findOrFail($id);
-        $user->name = $request->name;
-        $user->type = $request->type;
-        $user->email = $request->email;
-        $user->password = $request->password;
-        $user->details = $request->details;
+
+        $data = User::where(['id'=> $id])->update([
+            'name' => $request->name,
+            'slug_name' => str_slug($request->name),
+            'type' => $request->type,
+            'email' => $request->email,
+            'password' => $request->password,
+            'details' => $request->details,
+        ]);
 
         if($request->hasFile('image'))
         {
             $photo= $request->file('image');
             $photo->move('assets/user/',$photo->getClientOriginalName());
-            $user->image = 'assets/user/'.$photo->getClientOriginalName();
+            $data->image = 'assets/user/'.$photo->getClientOriginalName();
         }
-        $user->save();
+        $user = User::update($data);
 
         if ($user) {
             session()->flash('success','User stored successfully');
@@ -195,7 +199,5 @@ class UserController extends Controller
             return response()->json(['status' => 'success']);
         }
         return response()->json(['status' => 'fail']);
-
-//        return redirect()->route('user.index');
     }
 }

@@ -9,7 +9,7 @@
                 <img src="{{ asset($banner->image) }}" alt="Slider Image">
                 <div class="blog-post">
                     <div class="blog-outer">
-                        <h3 class="blog-title"><a href="{{ route('details',$banner->id) }}">{{ $banner->title }}</a></h3>
+                        <h3 class="blog-title"><a href="{{ route('details',$banner->slug_name) }}">{{ $banner->title }}</a></h3>
                         <div class="meta">
 {{--                            <span><a href="#"><i class="fa fa-tags"></i>{{ $banner->relUser->name }}</a></span>--}}
                             <span class="date">{{ $banner->published_date }}</span>
@@ -36,15 +36,15 @@
                             </div>
                             <div class="blog-outer">
                                 <div class="meta">
-                                    <span><a href="#"><i class="fa fa-tag"></i> {{ $post->relCategory->name }}</a></span>
+                                    <span><a href="{{ route('details',$post->slug_name) }}"><i class="fa fa-tag"></i> {{ $post->relCategory->name }}</a></span>
                                     <span class="date">{{ $post->published_date }}</span>
 {{--                                    <span><a href="#" data-toggle="tooltip" title="" data-original-title="25" class="like-icons"><i class="fa fa-heart-o"></i></a></span>--}}
 {{--                                    <span><a href="#" data-toggle="tooltip" title="" data-original-title="12" class="comments-icon"><i class="fa fa-comments-o"></i></a></span>--}}
                                 </div>
-                                <h3 class="blog-title"><a href="#">{{ $post->title }}</a></h3>
+                                <h3 class="blog-title"><a href="{{ route('details',$post->slug_name) }}">{{ $post->title }}</a></h3>
                                 <div class="admin-text">
                                     <p><img src="{{ asset($post->relUser->image) }}" alt="" class="img-circle" style="width: 10%"></p>
-                                    <i>By <a href="#">{{ $post->relUser->name }}</a></i>
+                                    <i>By <a href="{{ route('details',$post->slug_name) }}">{{ $post->relUser->name }}</a></i>
                                 </div>
                             </div>
                             <div class="blog-text">
@@ -92,10 +92,10 @@
                                 @foreach($recent_posts as $recent_post)
                                 <li>
                                     <div class="image-thumb">
-                                        <a href="{{ route('details',$recent_post->id) }}"><img src="{{ asset($recent_post->image) }}" alt=""></a>
+                                        <a href="{{ route('details',$recent_post->slug_name) }}"><img src="{{ asset($recent_post->image) }}" alt=""></a>
                                     </div>
                                     <div class="post-text">
-                                        <h4><a href="#">{{ $recent_post->relCategory->name }}</a></h4>
+                                        <h4><a href="{{ route('details',$recent_post->slug_name) }}">{{ $recent_post->relCategory->name }}</a></h4>
                                         <p>{{ Str::limit($recent_post->description, 80) }}</p>
                                         <div class="post-date">
                                             <i class="fa fa-clock-o"></i> {{ $recent_post->published_date }}
@@ -117,7 +117,7 @@
                                 <li>
                                     <div class="cat-desc">
                                         <div class="category-details">
-                                            <span><a href="{{ route('category.post',$cat->id) }}">{{ $cat->name }}</a></span>
+                                            <span><a href="{{ route('category.post',$cat->slug_name) }}">{{ $cat->name }}</a></span>
                                         </div>
                                         <div class="dots"></div>
                                         <div class="category-links">
@@ -138,9 +138,9 @@
                             <div class="owl-carousel" id="single-slider">
                                 @foreach($sliders as $slider)
                                 <div class="item">
-                                    <a href="#"><img alt="" src="{{ asset($slider->image) }}"></a>
+                                    <a href="{{ route('details',$slider->slug_name) }}"><img alt="" src="{{ asset($slider->image) }}"></a>
                                     <div class="recent-post-text">
-                                        <h4><a href="#">{{ $slider->title }}</a></h4>
+                                        <h4><a href="{{ route('details',$slider->slug_name) }}">{{ $slider->title }}</a></h4>
                                         <div class="post-date">
                                             <i class="fa fa-clock-o"></i> {{ $slider->published_date }}
                                         </div>

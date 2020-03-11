@@ -141,7 +141,7 @@
                                                                 <span class="sr-only">Toggle Dropdown</span>
                                                             </button>
                                                             <ul class="dropdown-menu pull-right" role="menu">
-                                                                <li><a class="dropdown-item" href="{{ route('post.edit',$post->id) }}"><i class="fa fa-edit"></i> Edit</a></li>
+                                                                <li><a class="dropdown-item" href="{{ route('post.edit',$post->slug_name) }}"><i class="fa fa-edit"></i> Edit</a></li>
                                                                 <li><a class="dropdown-item" href="" onclick="updateStatus({{ $post->id }})"><i class="fa fa-fw fa-search-plus"></i> Status</a></li>
                                                                 <li><a class="dropdown-item" data-toggle="modal" onclick="setpostid({{ $post->id}})" data-target="#addTag-modal"><i class="fa fa-tag"></i>Add tags</a></li>
                                                                 <li><div role="separator" class="dropdown-divider"></div></li>

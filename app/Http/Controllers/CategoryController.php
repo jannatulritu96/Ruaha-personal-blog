@@ -58,8 +58,10 @@ class CategoryController extends Controller
         ]);
 
         $categories = Category::create([
-            'name' => $request->name
+            'name' => $request->name,
+            'slug_name' => str_slug($request->name)
         ]);
+//        $slugName = str_slug($request->name);
 
         if ($categories) {
             session()->flash('success','Category stored successfully');
@@ -72,10 +74,10 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $slug_name
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug_name)
     {
         //
     }
@@ -83,12 +85,12 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $slug_name
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug_name)
     {
-        $category  = Category::findOrFail($id);
+        $category  = Category::where('slug_name',$slug_name)->first();
 
         return view('admin.category.edit',compact('category'));
     }
@@ -104,6 +106,7 @@ class CategoryController extends Controller
     {
         $category = Category::where(['id'=> $id])->update([
             'name' => $request->name,
+            'slug_name' => str_slug($request->name)
         ]);
         if ($category) {
             session()->flash('success','Category stored successfully');

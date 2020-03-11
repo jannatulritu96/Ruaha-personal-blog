@@ -64,7 +64,8 @@ class SubCategoryController extends Controller
 
         $sub_category = SubCategory::create([
             'cat_id' => $request->cat_id,
-            'name' => $request->name
+            'name' => $request->name,
+            'slug_name' => str_slug($request->name)
         ]);
 
         if ($sub_category) {
@@ -89,12 +90,12 @@ class SubCategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $slug_name
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug_name)
     {
-        $sub_category  = SubCategory::findOrFail($id);
+        $sub_category  = SubCategory::where('slug_name',$slug_name)->first();
         $category = Category::where('status','1')->get();
         return view('admin.sub-category.edit',compact('category','sub_category'));
     }
@@ -111,6 +112,7 @@ class SubCategoryController extends Controller
         $sub_category = SubCategory::where(['id'=> $id])->update([
             'cat_id'=>$request->cat_id,
             'name' => $request->name,
+            'slug_name' => str_slug($request->name)
         ]);
         if ($sub_category) {
             session()->flash('success','Sub category stored successfully');

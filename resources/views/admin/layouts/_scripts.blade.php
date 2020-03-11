@@ -41,3 +41,8 @@
 
 <!-- Select2 -->
 <script src="{{ asset('assets/assets/select2/js/select2.full.min.js')}}"></script>
+
+<!-- date picker -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.3/flatpickr.min.js"></script>
+
+<script src="{{ asset('assets/assets/libs/quill/dist/quill.min.js') }}"></script>

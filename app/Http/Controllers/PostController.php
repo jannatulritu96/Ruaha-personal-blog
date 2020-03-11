@@ -74,16 +74,17 @@ class PostController extends Controller
     public function create()
     {
         $users = User::where('permission', '1')->get();
+        $tags = Tag::get();
         $categories = Category::where('status', '1')->get();
         $sub_categories = SubCategory::with('relCategory')->where('status', '1')->get();
 
-        return view('admin.post.create', compact('users', 'categories', 'sub_categories'));
+        return view('admin.post.create', compact('users', 'categories', 'sub_categories','tags'));
     }
 
 
     public function subCat($id){
         $sub_categories = SubCategory::where('status', '1')->where('cat_id',$id)->get();
-        $sub_cat = ' <option>Select Sub Category</option>';
+        $sub_cat = ' <option value="">Select Sub Category</option>';
         foreach ($sub_categories as $sub_category) {
             $sub_cat .=  '<option value="'.$sub_category->cat_id.'">'.$sub_category->name.'</option>';
         }
@@ -97,9 +98,9 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+//        dd($request->all());
         $request->validate([
             'category_id' => 'required',
-            'sub_category' => 'required',
             'title' => 'required',
             'description' => 'required',
             'is_featured' => 'required',
@@ -107,28 +108,37 @@ class PostController extends Controller
             'status' => 'required',
         ]);
 
-        $posts = new Post();
-        if (Auth::user()->type == 1) {
-            $posts->user_id = $request->user_id;
-        } else {
-            $posts->user_id = auth()->user()->id;
-        }
-        $posts->category_id = $request->category_id;
-        $posts->sub_category = $request->sub_category;
-        $posts->title = $request->title;
-        $posts->description = $request->description;
-        $posts->is_featured = $request->is_featured;
-        $posts->published_date = $request->published_date;
-        $posts->status = $request->status;
-        $posts->banner_post = $request->banner_post;
-        $posts->slider_post = $request->slider_post;
+        $data = [
+            'category_id' => $request->category_id,
+            'sub_category' => $request->sub_category,
+            'title' => $request->title,
+            'slug_name' => str_slug($request->title),
+            'description' => $request->description,
+            'is_featured' => $request->is_featured,
+            'published_date' => $request->published_date,
+            'status' => $request->status,
+            'banner_post' => $request->banner_post,
+            'slider_post' => $request->slider_post,
+            'user_id' => auth()->user()->id,
+        ];
 
         if ($request->hasFile('image')) {
             $photo = $request->file('image');
             $photo->move('assets/post/', $photo->getClientOriginalName());
-            $posts->image = 'assets/post/' . $photo->getClientOriginalName();
+            $data['image'] = 'assets/post/' . $photo->getClientOriginalName();
         }
-        $posts->save();
+        $posts = Post::create($data);
+//dd($request->tag_id);
+        if (!empty($request->tag_id)) {
+//            $posts->relAssigntag()->attach($request->tag_ids);
+            foreach ($request->tag_id as $tag_id) {
+                $check = Assigntag::where(['post_id' => $posts->id, 'tag_id' => $tag_id])->count();
+                if ($check <= 0) {
+                    Assigntag::create(['post_id' => $posts->id, 'tag_id' => $tag_id]);
+                }
+            }
+        }
+
 
         if ($posts) {
             session()->flash('success', 'Post stored successfully');
@@ -152,12 +162,12 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param int $id
+     * @param int $slug_name
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug_name)
     {
-        $post = Post::findOrFail($id);
+        $post = Post::where('slug_name',$slug_name)->first();
         $user = User::where('permission', '1')->get();
         $category = Category::where('status', '1')->get();
         $sub_category = SubCategory::where('status', '1')->get();
@@ -175,30 +185,26 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
 
-//        dd($request->all());
-        $post = Post::findOrFail($id);
-        if (Auth::user()->type == 1) {
-            $post->user_id = $request->user_id;
-        } else {
-            $post->user_id = auth()->user()->id;
-        }
-        $post->category_id = $request->category_id;
-        $post->sub_category = $request->sub_category;
-        $post->title = $request->title;
-        $post->description = $request->description;
-        $post->is_featured = $request->is_featured;
-        $post->published_date = $request->published_date;
-        $post->status = $request->status;
-        $post->banner_post = $request->banner_post;
-        $post->slider_post = $request->slider_post;
-
+        $data = Post::where(['id'=> $id])->update([
+            'category_id' => $request->category_id,
+            'sub_category' => $request->sub_category,
+            'title' => $request->title,
+            'slug_name' => str_slug($request->title),
+            'description' => $request->description,
+            'is_featured' => $request->is_featured,
+            'published_date' => $request->published_date,
+            'status' => $request->status,
+            'banner_post' => $request->banner_post,
+            'slider_post' => $request->slider_post,
+            'user_id' => auth()->user()->id,
+        ]);
 
         if ($request->hasFile('image')) {
             $photo = $request->file('image');
             $photo->move('assets/post/', $photo->getClientOriginalName());
-            $post->image = 'assets/post/' . $photo->getClientOriginalName();
+            $data['image'] = 'assets/post/' . $photo->getClientOriginalName();
         }
-        $post->save();
+        $post = Post::update($data);
 
         if ($post) {
             session()->flash('success', 'Post stored successfully');

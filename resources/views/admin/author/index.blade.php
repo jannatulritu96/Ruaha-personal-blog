@@ -117,7 +117,7 @@
                                                             </button>
                                                             <ul class="dropdown-menu pull-right" role="menu">
                                                                 <li><a class="dropdown-item"
-                                                                       href="{{ route('user.edit',$user->id) }}"><i
+                                                                       href="{{ route('user.edit',$user->slug_name) }}"><i
                                                                             class="fa fa-edit"></i> Edit</a></li>
                                                                 <li><a class="dropdown-item" href=""
                                                                        onclick="updateStatus({{ $user->id }})"><i class="fa fa-fw fa-search-plus"></i> Status</a>

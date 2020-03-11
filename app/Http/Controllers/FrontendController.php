@@ -67,29 +67,29 @@ class FrontendController extends Controller
         return view('frontend.about',compact('categories','posts','sliders','recent_posts'));
     }
 
-    public function category_post($id)
+    public function category_post($slug_name)
     {
 
         $categories = Category::withCount('relPost')->get();
-
-//        $cats = Category::select(['id','name'])->where('status','Active')->get();
 
         $posts = Post::with('relUser','relCategory')->where('status','published')->orderBy('id','DESC')->get();
 
         $sliders = Post::where('slider_post','Approve')->with('relUser','relCategory')->get();
 
-        $recent_posts = Post::With('relCategory')->where('status','published')->orderBy('id','Desc')->limit(3)->get();
+        $recent_posts = Post::with('relCategory')->where('status','published')->orderBy('id','Desc')->limit(3)->get();
 
 
 
-        return view('frontend.category_posts',compact('posts','sliders','recent_posts','categories','cats'));
+        return view('frontend.category_posts',compact('posts','sliders','recent_posts','categories'));
 
     }
-    public function details($id)
+    public function details($slug_name)
     {
 
 
-        $posts = Post::where('id',$id)->with('relUser','relCategory')->where('status','published')->findOrFail($id);
+        $posts = Post::where('slug_name',$slug_name)->with('relUser','relCategory')->where('status','published')->first();
+
+        $banners = Post::where('slug_name',$slug_name)->where('banner_post','Approve')->with('relUser','relCategory')->orderBy('id','Desc')->limit(6)->get();
 
         $sliders = Post::where('slider_post','Approve')->with('relUser','relCategory')->get();
 
@@ -97,7 +97,7 @@ class FrontendController extends Controller
 
         $recent_posts = Post::With('relCategory')->where('status','published')->orderBy('id','Desc')->limit(3)->get();
 
-        return view('frontend.details',compact('posts','sliders','recent_posts','categories'));
+        return view('frontend.details',compact('posts','sliders','recent_posts','categories','banners'));
 
     }
 

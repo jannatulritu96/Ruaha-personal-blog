@@ -36,6 +36,7 @@ class TagController extends Controller
 //         dd($request->all());
         $request->validate([
             'tag_name'=>'required',
+            'slug_name' => str_slug($request->tag_name)
         ]);
 
         $check = Tag::where(['tag_name'=> $request->tag_name])->count();
@@ -50,9 +51,9 @@ class TagController extends Controller
         return redirect()->route('tags.index');
     }
 
-    public function edit($id)
+    public function edit($slug_name)
     {
-        $tag = Tag::findOrFail($id);
+        $tag = Tag::where('slug_name',$slug_name)->first();
         return view('admin.tag.edit',compact('tag'));
     }
 
@@ -61,6 +62,7 @@ class TagController extends Controller
 //         dd($request->all());
         $tag = Tag::where(['id'=> $id])->update([
             'tag_name' => $request->tag_name,
+            'slug_name' => str_slug($request->tag_name)
         ]);
         if ($tag) {
             session()->flash('success','Tag stored successfully');

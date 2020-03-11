@@ -26,7 +26,8 @@
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
-
+<!-- text editor -->
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 <!-- This Page CSS -->
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/assets/libs/select2/dist/css/select2.min.css') }}">
 <!-- Sweet alert -->
@@ -34,7 +35,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
 
-
-
 <link rel="stylesheet" href="{{ asset('assets/assets/libs/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
+<!-- date picker -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.3/flatpickr.min.css">
 

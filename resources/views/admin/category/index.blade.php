@@ -95,7 +95,7 @@
                                                         <span class="sr-only">Toggle Dropdown</span>
                                                     </button>
                                                     <ul class="dropdown-menu pull-right" role="menu">
-                                                        <li><a class="dropdown-item" href="{{ route('category.edit',$category->id) }}"><i class="fa fa-edit"></i> Edit</a></li>
+                                                        <li><a class="dropdown-item" href="{{ route('category.edit',$category->slug_name) }}"><i class="fa fa-edit"></i> Edit</a></li>
                                                         <li><a class="dropdown-item" href="" onclick="updateStatus({{ $category->id }})"><i class="fa fa-fw fa-search-plus"></i> Status</a></li>
                                                         <li><div role="separator" class="dropdown-divider"></div></li>
                                                         <li>

@@ -122,7 +122,7 @@
                                 <div class="form-group" style="margin-left: 5px;">
                                     <label for="image">Image</label><br>
                                     <img id="image" style="width:30%;margin-bottom: 8px;margin-left: -6px;margin-top: 8px;" src="{{ asset($post->image) }}"><br>
-                                    <input type="file"  name="image" accept="image/*"  required onchange="readURL(this);">
+                                    <input type="file"  name="image" accept="image/*"  onchange="readURL(this);">
                                     @error('image')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
